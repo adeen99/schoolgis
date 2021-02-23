@@ -1,0 +1,10 @@
+asgiref==3.2.10
+confusable-homoglyphs==3.2.0
+Django==3.1.2
+django-crispy-forms==1.10.0
+django-registration==3.1.1
+GDAL==3.1.4
+psycopg2==2.8.6
+psycopg2-binary==2.8.6
+pytz==2020.1
+sqlparse==0.4.1
