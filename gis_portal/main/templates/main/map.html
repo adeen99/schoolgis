@@ -6,19 +6,68 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Map</title>
 
 </head>
 
 <style>
     #map{
-    width:100%;
-    height:95vh;
+    position:fixed;
+    top:0;
+    bottom:0;
+    right:0;
+    left:16%;
+    }
+    #filters{
+    position: fixed;
+    overflow: scroll;
+    visibility: visible;
+    background-color:#111;
+    top: 0px;
+    bottom:0px;
+    left: 0px;
     }
 </style>
 <body>
-    <div id="map"></div>
+    <div id="map" class="col-md-10"></div>
+    <div id="filters" class="col-md-2">
+        <button id="ahmadnagar" class="form-control btn btn-success">Ahmadnagar</button>
+        <button id="akola" class="form-control btn btn-success">Akola</button>
+        <button id="amravati" class="form-control btn btn-success">Amravati</button>
+        <button id="aurangabad" class="form-control btn btn-success">Aurangabad</button>
+        <button id="beed" class="form-control btn btn-success">Beed</button>
+        <button id="bhandara" class="form-control btn btn-success">Bhandara</button>
+        <button id="buldana" class="form-control btn btn-success">Buldhana</button>
+        <button id="chandrapur" class="form-control btn btn-success">Chandrapur</button>
+        <button id="dhule" class="form-control btn btn-success">Dhule</button>
+        <button id="gadchiroli" class="form-control btn btn-success">Gadchiroli</button>
+        <button id="hingoli" class="form-control btn btn-success">Hingoli</button>
+        <button id="jalgaon" class="form-control btn btn-success">Jalgaon</button>
+        <button id="jalna" class="form-control btn btn-success">Jalna</button>
+        <button id="kolhapur" class="form-control btn btn-success">Kolhapur</button>
+        <button id="latur" class="form-control btn btn-success">Latur</button>
+        <button id="mumbai" class="form-control btn btn-success">Mumbaifull</button>
+        <button id="nagpur" class="form-control btn btn-success">Nagpur</button>
+        <button id="nanded" class="form-control btn btn-success">Nanded</button>
+        <button id="nandurbar" class="form-control btn btn-success">Nandurbar</button>
+        <button id="nashik" class="form-control btn btn-success">Nashik</button>
+        <button id="osmanabad" class="form-control btn btn-success">Osmanabad</button>
+        <button id="parbhani" class="form-control btn btn-success">Parbhani</button>
+        <button id="pune" class="form-control btn btn-success">Pune</button>
+        <button id="raigad" class="form-control btn btn-success">Raigad</button>
+        <button id="ratnagiri" class="form-control btn btn-success">Ratnagiri</button>
+        <button id="sangli" class="form-control btn btn-success">Sangli</button>
+        <button id="satara" class="form-control btn btn-success">Satara</button>
+        <button id="sindhudurg" class="form-control btn btn-success">Sindhudurg</button>
+        <button id="solapur" class="form-control btn btn-success">Solapur</button>
+        <button id="thane" class="form-control btn btn-success">Thane</button>
+        <button id="wardha" class="form-control btn btn-success">Wardha</button>
+        <button id="washim" class="form-control btn btn-success">Washim</button>
+        <button id="yavatmal" class="form-control btn btn-success">Yavatmal</button>
+
+
+    </div>
     <script>
         var map=L.map("map").setView([19.7515, 75.7139],7);
 
@@ -30,18 +79,277 @@
             }
         );
 
+        var darkLayer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        });
+
         var baseLayers = {
         osm:osm,
+        "dark layer":darkLayer,
         };
 
         osm.addTo(map);
         L.control.layers(baseLayers).addTo(map);
 
-        $.getJSON("{% url 'schooldata' %}", function (data){
-            console.log(data);
-            L.geoJSON(data).addTo(map);
+
+        $("#ahmadnagar").click(function (){
+            map.setView([19.0948, 74.7480],10);
+            $.getJSON("{% url 'ahmadnagardata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
             }
         );
+
+        $("#akola").click(function (){
+            map.setView([20.7002, 77.0082],10);
+            $.getJSON("{% url 'akoladata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#amravati").click(function (){
+            map.setView([20.9320, 77.7523],10);
+            $.getJSON("{% url 'amravatidata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#aurangabad").click(function (){
+            map.setView([19.8762, 75.3433],10);
+            $.getJSON("{% url 'aurangabaddata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#beed").click(function (){
+            map.setView([18.9901, 75.7531],10);
+            $.getJSON("{% url 'beeddata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#bhandara").click(function (){
+            map.setView([21.1777, 79.6570],10);
+            $.getJSON("{% url 'bhandaradata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#buldana").click(function (){
+            map.setView([20.5292, 76.1842],10);
+            $.getJSON("{% url 'buldanadata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#chandrapur").click(function (){
+            map.setView([19.9615, 79.2961],10);
+            $.getJSON("{% url 'chandrapurdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#dhule").click(function (){
+            map.setView([20.9042, 74.7749],10);
+            $.getJSON("{% url 'dhuledata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#gadchiroli").click(function (){
+            map.setView([19.4969, 80.2767],10);
+            $.getJSON("{% url 'gadchirolidata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#hingoli").click(function (){
+            map.setView([19.7174, 77.1494],10);
+            $.getJSON("{% url 'hingolidata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#jalgaon").click(function (){
+            map.setView([21.0077, 75.5626],10);
+            $.getJSON("{% url 'jalgaondata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#jalna").click(function (){
+            map.setView([19.8347, 75.8816],10);
+            $.getJSON("{% url 'jalnadata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#kolhapur").click(function (){
+            map.setView([16.7050, 74.2433],10);
+            $.getJSON("{% url 'kolhapurdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#latur").click(function (){
+            map.setView([18.4088, 76.5604],10);
+            $.getJSON("{% url 'laturdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#mumbai").click(function (){
+            map.setView([19.0760, 72.8777],10);
+            $.getJSON("{% url 'mumbaidata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#nagpur").click(function (){
+            map.setView([21.1458, 79.0882],10);
+            $.getJSON("{% url 'nagpurdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#nanded").click(function (){
+            map.setView([19.1383, 77.3210],10);
+            $.getJSON("{% url 'nandeddata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#nandurbar").click(function (){
+            map.setView([21.7469, 74.1240],10);
+            $.getJSON("{% url 'nandurbardata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#nashik").click(function (){
+            map.setView([19.9975, 73.7898],10);
+            $.getJSON("{% url 'nashikdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#osmanabad").click(function (){
+            map.setView([18.1853, 76.0420],10);
+            $.getJSON("{% url 'osmanabaddata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#parbhani").click(function (){
+            map.setView([19.2608, 76.7748],10);
+            $.getJSON("{% url 'parbhanidata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#pune").click(function (){
+            map.setView([18.5204, 73.8567],9);
+            $.getJSON("{% url 'punedata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#raigad").click(function (){
+            map.setView([18.5158, 73.1822],10);
+            $.getJSON("{% url 'raigaddata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#ratnagiri").click(function (){
+            map.setView([16.9902, 73.3120],10);
+            $.getJSON("{% url 'ratnagiridata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
+        $("#sangli").click(function (){
+            map.setView([16.8524, 74.5815],10);
+            $.getJSON("{% url 'sanglidata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#satara").click(function (){
+            map.setView([17.6805, 74.0183],10);
+            $.getJSON("{% url 'sataradata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#sindhudurg").click(function (){
+            map.setView([16.3492, 73.5594],10);
+            $.getJSON("{% url 'sindhudurgdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#solapur").click(function (){
+            map.setView([17.6599, 75.9064],10);
+            $.getJSON("{% url 'solapurdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#thane").click(function (){
+            map.setView([19.2183, 72.9781],10);
+            $.getJSON("{% url 'thanedata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#wardha").click(function (){
+            map.setView([20.7453, 78.6022],10);
+            $.getJSON("{% url 'wardhadata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#washim").click(function (){
+            map.setView([20.1119, 77.1313],10);
+            $.getJSON("{% url 'washimdata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+        $("#yavatmal").click(function (){
+            map.setView([20.3899, 78.1307],10);
+            $.getJSON("{% url 'yavatmaldata' %}", function (data){
+                L.geoJSON(data).addTo(map);
+                });
+            }
+        );
+
     </script>
 </body>
 </html>
