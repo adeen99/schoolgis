@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,7 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="{% static 'L.Geoserver.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Map</title>
@@ -82,7 +85,8 @@
         var darkLayer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
             maxZoom: 20,
             attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-        });
+            }
+        );
 
         var baseLayers = {
         osm:osm,
@@ -91,6 +95,26 @@
 
         osm.addTo(map);
         L.control.layers(baseLayers).addTo(map);
+
+
+<!--        var wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {-->
+<!--            layers: "maha:hingoli",-->
+<!--            onEachFeature: function (feature, layer) {-->
+<!--                layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');-->
+<!--            },-->
+<!--            CQL_FILTER: "water=5",-->
+<!--        });-->
+<!--        wfsLayer.addTo(map);-->
+
+<!--        var wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {-->
+<!--            layers: "maha:school",-->
+<!--            onEachFeature: function (feature, layer) {-->
+<!--                layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');-->
+<!--            },-->
+<!--            CQL_FILTER: "distname='HINGOLI'",-->
+<!--        });-->
+<!--        wfsLayerAdvance.addTo(map);-->
+
 
 
         $("#ahmadnagar").click(function (){
