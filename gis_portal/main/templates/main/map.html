@@ -4,73 +4,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script src="{% static 'L.Geoserver.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <title>Map</title>
 
 </head>
 
 <style>
+<!--    header{-->
+<!--        top:0;-->
+<!--        height:50px;-->
+<!--        background-color:#73AD21;-->
+<!--    }-->
     #map{
-    position:fixed;
-    top:0;
-    bottom:0;
-    right:0;
-    left:16%;
+        height:100%;
+        right:0;
+        position: absolute;
     }
     #filters{
-    position: fixed;
-    overflow: scroll;
-    visibility: visible;
-    background-color:#111;
-    top: 0px;
-    bottom:0px;
-    left: 0px;
+        position: fixed;
+        top:0;
+        height:100%;
+        overflow: scroll;
+        background-color:#111;
     }
 </style>
 <body>
-    <div id="map" class="col-md-10"></div>
-    <div id="filters" class="col-md-2">
-        <button id="ahmadnagar" class="form-control btn btn-success">Ahmadnagar</button>
-        <button id="akola" class="form-control btn btn-success">Akola</button>
-        <button id="amravati" class="form-control btn btn-success">Amravati</button>
-        <button id="aurangabad" class="form-control btn btn-success">Aurangabad</button>
-        <button id="beed" class="form-control btn btn-success">Beed</button>
-        <button id="bhandara" class="form-control btn btn-success">Bhandara</button>
-        <button id="buldana" class="form-control btn btn-success">Buldhana</button>
-        <button id="chandrapur" class="form-control btn btn-success">Chandrapur</button>
-        <button id="dhule" class="form-control btn btn-success">Dhule</button>
-        <button id="gadchiroli" class="form-control btn btn-success">Gadchiroli</button>
-        <button id="hingoli" class="form-control btn btn-success">Hingoli</button>
-        <button id="jalgaon" class="form-control btn btn-success">Jalgaon</button>
-        <button id="jalna" class="form-control btn btn-success">Jalna</button>
-        <button id="kolhapur" class="form-control btn btn-success">Kolhapur</button>
-        <button id="latur" class="form-control btn btn-success">Latur</button>
-        <button id="mumbai" class="form-control btn btn-success">Mumbaifull</button>
-        <button id="nagpur" class="form-control btn btn-success">Nagpur</button>
-        <button id="nanded" class="form-control btn btn-success">Nanded</button>
-        <button id="nandurbar" class="form-control btn btn-success">Nandurbar</button>
-        <button id="nashik" class="form-control btn btn-success">Nashik</button>
-        <button id="osmanabad" class="form-control btn btn-success">Osmanabad</button>
-        <button id="parbhani" class="form-control btn btn-success">Parbhani</button>
-        <button id="pune" class="form-control btn btn-success">Pune</button>
-        <button id="raigad" class="form-control btn btn-success">Raigad</button>
-        <button id="ratnagiri" class="form-control btn btn-success">Ratnagiri</button>
-        <button id="sangli" class="form-control btn btn-success">Sangli</button>
-        <button id="satara" class="form-control btn btn-success">Satara</button>
-        <button id="sindhudurg" class="form-control btn btn-success">Sindhudurg</button>
-        <button id="solapur" class="form-control btn btn-success">Solapur</button>
-        <button id="thane" class="form-control btn btn-success">Thane</button>
-        <button id="wardha" class="form-control btn btn-success">Wardha</button>
-        <button id="washim" class="form-control btn btn-success">Washim</button>
-        <button id="yavatmal" class="form-control btn btn-success">Yavatmal</button>
+<!--    <header class="col-md-12">-->
+<!--        <h2 class="text-center" style="color: white;">School Location</h2>-->
+<!--    </header>-->
+    <div id="map" class="col-md-9"></div>
 
 
+    <div id="filters" class="col-md-3">
+        <h3 class="text-center" style="color: white;">FILTERS</h3>
+
+        <div id="accordion">
+            <div class="card-flush">
+                <div class="card-header">
+                    <a class="form-control btn btn-outline-success card-link" data-toggle="collapse" href="#collapseOne" style="text-align: center;">
+                        All Districts
+                    </a>
+                </div>
+                <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+                        <button id="ahmadnagar" class="form-control btn btn-success" onclick="cls()">Ahmadnagar</button>
+                        <button id="akola" class="form-control btn btn-success" onclick="cls()">Akola</button>
+                        <button id="amravati" class="form-control btn btn-success" onclick="cls()">Amravati</button>
+                        <button id="aurangabad" class="form-control btn btn-success" onclick="cls()">Aurangabad</button>
+                        <button id="beed" class="form-control btn btn-success" onclick="cls()">Beed</button>
+                        <button id="bhandara" class="form-control btn btn-success" onclick="cls()">Bhandara</button>
+                        <button id="buldana" class="form-control btn btn-success" onclick="cls()">Buldhana</button>
+                        <button id="chandrapur" class="form-control btn btn-success" onclick="cls()">Chandrapur</button>
+                        <button id="dhule" class="form-control btn btn-success" onclick="cls()">Dhule</button>
+                        <button id="gadchiroli" class="form-control btn btn-success" onclick="cls()">Gadchiroli</button>
+                        <button id="hingoli" class="form-control btn btn-success" onclick="cls()">Hingoli</button>
+                        <button id="jalgaon" class="form-control btn btn-success" onclick="cls()">Jalgaon</button>
+                        <button id="jalna" class="form-control btn btn-success" onclick="cls()">Jalna</button>
+                        <button id="kolhapur" class="form-control btn btn-success" onclick="cls()">Kolhapur</button>
+                        <button id="latur" class="form-control btn btn-success" onclick="cls()">Latur</button>
+                        <button id="mumbai" class="form-control btn btn-success" onclick="cls()">Mumbai</button>
+                        <button id="nagpur" class="form-control btn btn-success" onclick="cls()">Nagpur</button>
+                        <button id="nanded" class="form-control btn btn-success" onclick="cls()">Nanded</button>
+                        <button id="nandurbar" class="form-control btn btn-success" onclick="cls()">Nandurbar</button>
+                        <button id="nashik" class="form-control btn btn-success" onclick="cls()">Nashik</button>
+                        <button id="osmanabad" class="form-control btn btn-success" onclick="cls()">Osmanabad</button>
+                        <button id="parbhani" class="form-control btn btn-success" onclick="cls()">Parbhani</button>
+                        <button id="pune" class="form-control btn btn-success" onclick="cls()">Pune</button>
+                        <button id="raigad" class="form-control btn btn-success" onclick="cls()">Raigad</button>
+                        <button id="ratnagiri" class="form-control btn btn-success" onclick="cls()">Ratnagiri</button>
+                        <button id="sangli" class="form-control btn btn-success" onclick="cls()">Sangli</button>
+                        <button id="satara" class="form-control btn btn-success" onclick="cls()">Satara</button>
+                        <button id="sindhudurg" class="form-control btn btn-success" onclick="cls()">Sindhudurg</button>
+                        <button id="solapur" class="form-control btn btn-success" onclick="cls()">Solapur</button>
+                        <button id="thane" class="form-control btn btn-success" onclick="cls()">Thane</button>
+                        <button id="wardha" class="form-control btn btn-success" onclick="cls()">Wardha</button>
+                        <button id="washim" class="form-control btn btn-success" onclick="cls()">Washim</button>
+                        <button id="yavatmal" class="form-control btn btn-success" onclick="cls()">Yavatmal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-flush">
+                <div class="card-header">
+                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseTwo" style="text-align: center;">
+                        Classroom
+                    </a>
+                </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <button id="cyy" class="form-control btn btn-success" onclick="cls()">Yes</button>
+                        <button id="cyn" class="form-control btn btn-success" onclick="cls()">No</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-flush">
+                <div class="card-header">
+                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseThree" style="text-align: center;">
+                        Water
+                    </a>
+                </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <button id="Wgood" class="form-control btn btn-success" onclick="cls()">Good</button>
+                        <button id="Wmedium" class="form-control btn btn-success" onclick="cls()">Medium</button>
+                        <button id="Wpoor" class="form-control btn btn-success" onclick="cls()">Poor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-flush">
+                <div class="card-header">
+                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseFour" style="text-align: center;">
+                        Girls Toilet
+                    </a>
+                </div>
+                <div id="collapseFour" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <button id="cfy" class="form-control btn btn-success" onclick="cls()">Yes</button>
+                        <button id="cfn" class="form-control btn btn-success" onclick="cls()">No</button>
+                    </div>
+                </div>
+            </div>
+            <div id="nandur">
+                <div class="card-flush">
+                    <div class="card-header">
+                        <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseFive" style="text-align: center;">
+                            Nandurbad
+                        </a>
+                    </div>
+                    <div id="collapseFive" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="card-flush">
+                                <div class="card-header">
+                                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseNE" style="text-align: center;">
+                                        Electricity
+                                    </a>
+                                </div>
+                                <div id="collapseNE" class="collapse" data-parent="#nandur">
+                                    <div class="card-body">
+                                        <button id="NEgood" class="form-control btn btn-success" onclick="cls()">Good</button>
+                                        <button id="NEmedium" class="form-control btn btn-success" onclick="cls()">Medium</button>
+                                        <button id="NEpoor" class="form-control btn btn-success" onclick="cls()">Poor</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-flush">
+                                <div class="card-header">
+                                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseNW" style="text-align: center;">
+                                        Water
+                                    </a>
+                                </div>
+                                <div id="collapseNW" class="collapse" data-parent="#nandur">
+                                    <div class="card-body">
+                                        <button id="NWgood" class="form-control btn btn-success" onclick="cls()">Good</button>
+                                        <button id="NWmedium" class="form-control btn btn-success" onclick="cls()">Medium</button>
+                                        <button id="NWpoor" class="form-control btn btn-success" onclick="cls()">Poor</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-flush">
+                                <div class="card-header">
+                                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseGT" style="text-align: center;">
+                                        Girls Toilet
+                                    </a>
+                                </div>
+                                <div id="collapseGT" class="collapse" data-parent="#nandur">
+                                    <div class="card-body">
+                                        <button id="GTy" class="form-control btn btn-success" onclick="cls()">Yes</button>
+                                        <button id="GTn" class="form-control btn btn-success" onclick="cls()">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-flush">
+                                <div class="card-header">
+                                    <a class="form-control btn btn-outline-success collapsed card-link" data-toggle="collapse" href="#collapseCR" style="text-align: center;">
+                                        Classroom
+                                    </a>
+                                </div>
+                                <div id="collapseCR" class="collapse" data-parent="#nandur">
+                                    <div class="card-body">
+                                        <button id="CRy" class="form-control btn btn-success" onclick="cls()">Yes</button>
+                                        <button id="CRn" class="form-control btn btn-success" onclick="cls()">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <script>
         var map=L.map("map").setView([19.7515, 75.7139],7);
 
@@ -82,295 +213,723 @@
             }
         );
 
-        var darkLayer = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+        var darkLayer = L.tileLayer(
+            'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png',
+            {
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
             }
         );
 
         var baseLayers = {
-        osm:osm,
-        "dark layer":darkLayer,
+        'osm':osm,
+        'dark layer':darkLayer
         };
-
         osm.addTo(map);
         L.control.layers(baseLayers).addTo(map);
 
+        var wfsLayer="";
+        var wfsLayerAdvance="";
+        var circle="";
+        count=0;
+        countd=0;
 
-<!--        var wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {-->
-<!--            layers: "maha:hingoli",-->
-<!--            onEachFeature: function (feature, layer) {-->
-<!--                layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');-->
-<!--            },-->
-<!--            CQL_FILTER: "water=5",-->
-<!--        });-->
-<!--        wfsLayer.addTo(map);-->
-
-<!--        var wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {-->
-<!--            layers: "maha:school",-->
-<!--            onEachFeature: function (feature, layer) {-->
-<!--                layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');-->
-<!--            },-->
-<!--            CQL_FILTER: "distname='HINGOLI'",-->
-<!--        });-->
-<!--        wfsLayerAdvance.addTo(map);-->
-
-
-
-        $("#ahmadnagar").click(function (){
-            map.setView([19.0948, 74.7480],10);
-            $.getJSON("{% url 'ahmadnagardata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+        function cls(){
+<!--            console.log(count);-->
+            if(count!=0){
+                wfsLayer.remove();
+                circle.remove();
+                count--;
             }
-        );
+            else if(countd!=0){
+                wfsLayerAdvance.remove();
+                countd--;
+            }
+        }
+
+        $("#cfy").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "toilet_g>0",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#cfn").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "toilet_g=0",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#cyy").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "clrooms>0",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#cyn").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "clrooms=0",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#Wgood").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "water>=4",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#Wmedium").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "water BETWEEN 1 AND 3",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#Wpoor").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "water<=1",
+            });
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#NEgood").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "electric_y>=3",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'yellow',
+                fillColor: '#FFFF00',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#NEmedium").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "electric_y=2",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'yellow',
+                fillColor: '#FFFF00',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#NEpoor").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "electric_y<=1",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'yellow',
+                fillColor: '#FFFF00',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#NWgood").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "water>=4",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'blue',
+                fillColor: '#0000FF',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#NWmedium").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "water BETWEEN 1 AND 3",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'blue',
+                fillColor: '#0000FF',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#NWpoor").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "water<=1",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'blue',
+                fillColor: '#0000FF',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#GTy").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "toilet_g>0",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'orange',
+                fillColor: '#FFA500',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#GTn").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "toilet_g=0",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'orange',
+                fillColor: '#FFA500',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#CRy").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "clrooms>0",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
+
+        $("#CRn").click(function (){
+            wfsLayer = L.Geoserver.wfs("http://localhost:8080/geoserver/wfs", {
+                layers: "maha:nandurbar",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
+                },
+                CQL_FILTER: "clrooms=0",
+            });
+            circle = L.circle([21.4164, 74.1299], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius:75000,
+            }).addTo(map);
+            count++;
+            wfsLayer.addTo(map);
+        });
 
         $("#akola").click(function (){
-            map.setView([20.7002, 77.0082],10);
-            $.getJSON("{% url 'akoladata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='AKOLA'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
+        });
+
+        $("#ahmadnagar").click(function (){
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='AHMADNAGAR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
+
         $("#amravati").click(function (){
-            map.setView([20.9320, 77.7523],10);
-            $.getJSON("{% url 'amravatidata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='AMRAVATI'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#aurangabad").click(function (){
-            map.setView([19.8762, 75.3433],10);
-            $.getJSON("{% url 'aurangabaddata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='	AURANGABAD (MAHARASHTRA)'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#beed").click(function (){
-            map.setView([18.9901, 75.7531],10);
-            $.getJSON("{% url 'beeddata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='BID'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#bhandara").click(function (){
-            map.setView([21.1777, 79.6570],10);
-            $.getJSON("{% url 'bhandaradata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='BHANDARA'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#buldana").click(function (){
-            map.setView([20.5292, 76.1842],10);
-            $.getJSON("{% url 'buldanadata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='BULDANA'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#chandrapur").click(function (){
-            map.setView([19.9615, 79.2961],10);
-            $.getJSON("{% url 'chandrapurdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='CHANDRAPUR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#dhule").click(function (){
-            map.setView([20.9042, 74.7749],10);
-            $.getJSON("{% url 'dhuledata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='DHULE'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#gadchiroli").click(function (){
-            map.setView([19.4969, 80.2767],10);
-            $.getJSON("{% url 'gadchirolidata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='GADCHIROLI'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#hingoli").click(function (){
-            map.setView([19.7174, 77.1494],10);
-            $.getJSON("{% url 'hingolidata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='HINGOLI'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#jalgaon").click(function (){
-            map.setView([21.0077, 75.5626],10);
-            $.getJSON("{% url 'jalgaondata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='JALGAON'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#jalna").click(function (){
-            map.setView([19.8347, 75.8816],10);
-            $.getJSON("{% url 'jalnadata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='JALNA'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#kolhapur").click(function (){
-            map.setView([16.7050, 74.2433],10);
-            $.getJSON("{% url 'kolhapurdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='KOLHAPUR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#latur").click(function (){
-            map.setView([18.4088, 76.5604],10);
-            $.getJSON("{% url 'laturdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='LATUR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#mumbai").click(function (){
-            map.setView([19.0760, 72.8777],10);
-            $.getJSON("{% url 'mumbaidata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='MUMBAI (SUBURBAN)'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#nagpur").click(function (){
-            map.setView([21.1458, 79.0882],10);
-            $.getJSON("{% url 'nagpurdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='NAGPUR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#nanded").click(function (){
-            map.setView([19.1383, 77.3210],10);
-            $.getJSON("{% url 'nandeddata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='NANDED'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#nandurbar").click(function (){
-            map.setView([21.7469, 74.1240],10);
-            $.getJSON("{% url 'nandurbardata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='NANDURBAR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#nashik").click(function (){
-            map.setView([19.9975, 73.7898],10);
-            $.getJSON("{% url 'nashikdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='NASHIK'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#osmanabad").click(function (){
-            map.setView([18.1853, 76.0420],10);
-            $.getJSON("{% url 'osmanabaddata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='OSMANABAD'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#parbhani").click(function (){
-            map.setView([19.2608, 76.7748],10);
-            $.getJSON("{% url 'parbhanidata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='PARBHANI'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#pune").click(function (){
-            map.setView([18.5204, 73.8567],9);
-            $.getJSON("{% url 'punedata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='PUNE'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#raigad").click(function (){
-            map.setView([18.5158, 73.1822],10);
-            $.getJSON("{% url 'raigaddata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='RAIGAD'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#ratnagiri").click(function (){
-            map.setView([16.9902, 73.3120],10);
-            $.getJSON("{% url 'ratnagiridata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='RATNAGIRI'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
         $("#sangli").click(function (){
-            map.setView([16.8524, 74.5815],10);
-            $.getJSON("{% url 'sanglidata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='SANGLI'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#satara").click(function (){
-            map.setView([17.6805, 74.0183],10);
-            $.getJSON("{% url 'sataradata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='SATARA'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#sindhudurg").click(function (){
-            map.setView([16.3492, 73.5594],10);
-            $.getJSON("{% url 'sindhudurgdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='SINDHUDURG'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#solapur").click(function (){
-            map.setView([17.6599, 75.9064],10);
-            $.getJSON("{% url 'solapurdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='SOLAPUR'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#thane").click(function (){
-            map.setView([19.2183, 72.9781],10);
-            $.getJSON("{% url 'thanedata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='THANE'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#wardha").click(function (){
-            map.setView([20.7453, 78.6022],10);
-            $.getJSON("{% url 'wardhadata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='WARDHA'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#washim").click(function (){
-            map.setView([20.1119, 77.1313],10);
-            $.getJSON("{% url 'washimdata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='WASHIM'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
         $("#yavatmal").click(function (){
-            map.setView([20.3899, 78.1307],10);
-            $.getJSON("{% url 'yavatmaldata' %}", function (data){
-                L.geoJSON(data).addTo(map);
-                });
+            wfsLayerAdvance = L.Geoserver.wfs("http://localhost:8080/geoserver/wms", {
+                layers: "maha:school",
+                onEachFeature: function (feature, layer) {
+                    layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.schcd+ '</h5>');
+                },
+                CQL_FILTER: "distname='YAVATMAL'",
+            });
+            countd++;
+            wfsLayerAdvance.addTo(map);
             }
         );
 
