@@ -230,15 +230,153 @@
 
         var wfsLayer="";
         var wfsLayerAdvance="";
-        var circle="";
         count=0;
         countd=0;
 
+        var wmsLayer = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:ahmednagar_bound",
+        }).addTo(map);
+
+        var wmsLayer2 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:akola_bound",
+        }).addTo(map);
+
+        var wmsLayer3 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:amravati_bound",
+        }).addTo(map);
+
+        var wmsLayer4 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:Mumbai_Suburban_bound",
+        }).addTo(map);
+
+        var wmsLayer5 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:Mumbai_City_bound",
+        }).addTo(map);
+
+        var wmsLayer6 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:aurangabad_bound",
+        }).addTo(map);
+
+        var wmsLayer7 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:beed_bound",
+        }).addTo(map);
+
+        var wmsLayer8 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:bhandara_bound",
+        }).addTo(map);
+
+        var wmsLayer9 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:buldhana_bound",
+        }).addTo(map);
+
+        var wmsLayer10 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:chandrapur_bound",
+        }).addTo(map);
+
+        var wmsLayer11 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:gadchiroli_bound",
+        }).addTo(map);
+
+        var wmsLayer12 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:dhule_bound",
+        }).addTo(map);
+
+        var wmsLayer13 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:jalgaon_bound",
+        }).addTo(map);
+
+        var wmsLayer14 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:jalna_bound",
+        }).addTo(map);
+
+        var wmsLayer15 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:kolhapur_bound",
+        }).addTo(map);
+
+        var wmsLayer16 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:latur_bound",
+        }).addTo(map);
+
+        var wmsLayer17 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:nagpur_bound",
+        }).addTo(map);
+
+        var wmsLayer18 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:nanded_bound",
+        }).addTo(map);
+
+        var wmsLayer19 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:washim_bound",
+        }).addTo(map);
+
+        var wmsLayer20 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:nashik_bound",
+        }).addTo(map);
+
+        var wmsLayer21 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:nbound",
+        }).addTo(map);
+
+        var wmsLayer22 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:osmanabad_bound",
+        }).addTo(map);
+
+        var wmsLayer23 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:palghar_bound",
+        }).addTo(map);
+
+        var wmsLayer24 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:yavatmal_bound",
+        }).addTo(map);
+
+        var wmsLayer25 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:parbhani_bound",
+        }).addTo(map);
+
+        var wmsLayer26 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:pune_bound",
+        }).addTo(map);
+
+        var wmsLayer27 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:raigad_bound",
+        }).addTo(map);
+
+        var wmsLayer28 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:ratnagiri_bound",
+        }).addTo(map);
+
+        var wmsLayer29 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:sangli_bound",
+        }).addTo(map);
+
+        var wmsLayer30 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:satara_bound",
+        }).addTo(map);
+
+        var wmsLayer31 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:sindhudurg_bound",
+        }).addTo(map);
+
+        var wmsLayer32 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:solapur_bound",
+        }).addTo(map);
+
+        var wmsLayer33 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:thane_bound",
+        }).addTo(map);
+
+        var wmsLayer34 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {
+            layers: "maha:wardha_bound",
+        }).addTo(map);
+
+<!--        var wmsLayer35 = L.Geoserver.wms("http://localhost:8080/geoserver/wms", {-->
+<!--            layers: "maha:hingoli_bound",-->
+<!--        }).addTo(map);-->
+
+
         function cls(){
-<!--            console.log(count);-->
             if(count!=0){
                 wfsLayer.remove();
-                circle.remove();
                 count--;
             }
             else if(countd!=0){
@@ -339,12 +477,7 @@
                 },
                 CQL_FILTER: "electric_y>=3",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'yellow',
-                fillColor: '#FFFF00',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
+
             count++;
             wfsLayer.addTo(map);
         });
@@ -357,12 +490,7 @@
                 },
                 CQL_FILTER: "electric_y=2",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'yellow',
-                fillColor: '#FFFF00',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
+
             count++;
             wfsLayer.addTo(map);
         });
@@ -375,12 +503,7 @@
                 },
                 CQL_FILTER: "electric_y<=1",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'yellow',
-                fillColor: '#FFFF00',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
+
             count++;
             wfsLayer.addTo(map);
         });
@@ -393,12 +516,7 @@
                 },
                 CQL_FILTER: "water>=4",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'blue',
-                fillColor: '#0000FF',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
+
             count++;
             wfsLayer.addTo(map);
         });
@@ -411,12 +529,7 @@
                 },
                 CQL_FILTER: "water BETWEEN 1 AND 3",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'blue',
-                fillColor: '#0000FF',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
+
             count++;
             wfsLayer.addTo(map);
         });
@@ -429,12 +542,6 @@
                 },
                 CQL_FILTER: "water<=1",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'blue',
-                fillColor: '#0000FF',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
             count++;
             wfsLayer.addTo(map);
         });
@@ -447,12 +554,7 @@
                 },
                 CQL_FILTER: "toilet_g>0",
             });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'orange',
-                fillColor: '#FFA500',
-                fillOpacity: 0.5,
-                radius:75000,
-            }).addTo(map);
+
             count++;
             wfsLayer.addTo(map);
         });
@@ -464,15 +566,10 @@
                     layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
                 },
                 CQL_FILTER: "toilet_g=0",
-            });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'orange',
-                fillColor: '#FFA500',
-                fillOpacity: 0.5,
-                radius:75000,
             }).addTo(map);
+
             count++;
-            wfsLayer.addTo(map);
+
         });
 
         $("#CRy").click(function (){
@@ -482,15 +579,9 @@
                     layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
                 },
                 CQL_FILTER: "clrooms>0",
-            });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius:75000,
             }).addTo(map);
+
             count++;
-            wfsLayer.addTo(map);
         });
 
         $("#CRn").click(function (){
@@ -500,15 +591,10 @@
                     layer.bindPopup('<h5>School Name:' +feature.properties.school_nam+ '</h5><h5>School Code:' +feature.properties.school_cod+ '</h5>');
                 },
                 CQL_FILTER: "clrooms=0",
-            });
-            circle = L.circle([21.4164, 74.1299], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius:75000,
             }).addTo(map);
+
             count++;
-            wfsLayer.addTo(map);
+
         });
 
         $("#akola").click(function (){
